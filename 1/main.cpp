@@ -27,8 +27,8 @@ int main()
 {
     locale loc("ru_RU.UTF-8");
     locale::global(loc);
-    check(L"THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG",L"Simple");
-    check(L"THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG",L"");
-    check(L"THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG",L"ABCD123");
+    check(L"ИБСТ",L"ПРИМЕР");
+    check(L"ИБСТ",L"");
+    check(L"ИБСТ",L"123");
     return 0;
 }
