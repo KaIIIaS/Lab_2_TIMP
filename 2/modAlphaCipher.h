@@ -12,11 +12,11 @@ using namespace std;
 class modAlphaCipher
 {
 private:
-    const int num_rows;
+    const int num_of_columns;
     string getValidText(const std::string & str);
 public:
     modAlphaCipher() = delete;
-    modAlphaCipher(const int& key) :num_rows(key) {};    //конструктор
+    modAlphaCipher(const int& key) :num_of_columns(key) {};    //конструктор
     string encrypt(const string& open_text);               //зашифрование
     string decrypt(const string& cipher_text);             //расшифрование
 };
