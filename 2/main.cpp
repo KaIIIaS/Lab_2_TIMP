@@ -1,34 +1,38 @@
 #include "modAlphaCipher.h"
 
-void check(const string& Text, const string& key)
+void check(const std::string& Text, const std::string& key)
 {
     try {
-        string cipherText;
-        string decryptedText;
+        std::string cipherText;
+        std::string decryptedText;
         if (key.empty())
             throw cipher_error("Empty key");
-        if (stoi(key) > 0) {
-            modAlphaCipher cipher(stoi(key));
-            cipherText = cipher.encrypt(Text);
-            decryptedText = cipher.decrypt(cipherText);
-            cout << "key = " << key << endl;
-            cout << "Encrypted text: " << cipherText << endl;
-            cout << "Decrypted text: " << decryptedText << endl;
-        } else
+        int intKey = std::stoi(key);
+        if (intKey <= 0)
             throw cipher_error(std::string("Invalid key ") + key);
+
+		if (intKey >= static_cast<int>(Text.length()))
+    		throw cipher_error("Key length is greater than or equal to text length");
+
+        modAlphaCipher cipher(intKey);
+        cipherText = cipher.encrypt(Text);
+        decryptedText = cipher.decrypt(cipherText);
+        std::cout << "key = " << key << std::endl;
+        std::cout << "Encrypted text: " << cipherText << std::endl;
+        std::cout << "Decrypted text: " << decryptedText << std::endl;
     } catch (const cipher_error & e) {
-        cerr << "Error: " << e.what() << endl;
+        std::cerr << "Error: " << e.what() << std::endl;
     }
-    cout << "" << endl;
+    std::cout << "" << std::endl;
 }
 
 int main()
 {
     check("THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG","0");
     check("THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG","");
-    check("THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG","100");
+    check("THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG","5");
     check("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG","100");
-    check("123","100");
+    check("123","5");
     
     return 0;
 }
