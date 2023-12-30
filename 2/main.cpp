@@ -11,8 +11,7 @@ void check(const std::string& Text, const std::string& key)
         if (intKey <= 0)
             throw cipher_error(std::string("Invalid key ") + key);
 
-		if (intKey >= static_cast<int>(Text.length()))
-    		throw cipher_error("Key length is greater than or equal to text length");
+		
 
         modAlphaCipher cipher(intKey);
         cipherText = cipher.encrypt(Text);
