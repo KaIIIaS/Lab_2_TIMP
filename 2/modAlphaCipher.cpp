@@ -37,6 +37,10 @@ string modAlphaCipher::encrypt(const string& original_text)
             }
         }
     }
+    if (original_text != valid_text){
+    	throw cipher_error("Invalid key length");
+    }
+    
     return cipher_text;
 }
 
