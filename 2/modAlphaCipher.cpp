@@ -37,26 +37,23 @@ string modAlphaCipher::encrypt(const string& original_text)
             }
         }
     }
-    if (original_text != valid_text){
-    	throw cipher_error("Invalid key length");
-    }
+    
     
     return cipher_text;
 }
 
-inline std::string modAlphaCipher::getValidText(const std::string & str)
-{
-    string tmp;
-    for (auto c:str) {
-        if (isalpha (c)) {
-            if (islower (c))
-                tmp.push_back(toupper(c));
-            else
-                tmp.push_back(c);
+
+string modAlphaCipher::getValidText(const string & text) {
+    if (text.empty()) {
+        throw cipher_error("Пустая строка!");
+    }
+    if (num_rows >= text.length()) {
+        throw cipher_error("Длина ключа не может быть больше длины текста!");
+    }
+    for (char c : text) {
+        if (!isalpha(c)) {
+            throw cipher_error("Текст содержит недопустимые символы!");
         }
     }
-
-    if (tmp.empty())
-        throw cipher_error ("Empty open text");
-    return tmp;
+    return text;
 }
