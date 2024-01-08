@@ -47,7 +47,7 @@ string modAlphaCipher::getValidText(const string & text) {
     if (text.empty()) {
         throw cipher_error("Пустая строка!");
     }
-    if (num_rows >= text.length()) {
+    if (static_cast<std::string::size_type>(num_rows) >= text.length()) {
         throw cipher_error("Длина ключа не может быть больше длины текста!");
     }
     for (char c : text) {
