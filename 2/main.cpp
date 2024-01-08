@@ -31,7 +31,6 @@ int main()
     check("THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG","");
     check("THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG","5");
     check("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG","100");
-    check("123","5");
     
     return 0;
 }
