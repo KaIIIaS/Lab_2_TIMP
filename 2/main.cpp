@@ -1,36 +1,32 @@
 #include "modAlphaCipher.h"
-
-void check(const std::string& Text, const std::string& key)
+using namespace std;
+void check(const string& Text, const string& key)
 {
-    try {
-        std::string cipherText;
-        std::string decryptedText;
-        if (key.empty())
+	try {
+		string cipherText;
+		string decryptedText;
+		if (key.empty())
             throw cipher_error("Empty key");
-        int intKey = std::stoi(key);
-        if (intKey <= 0)
-            throw cipher_error(std::string("Invalid key ") + key);
+        if (stoi(key) > 1) {
+            modAlphaCipher cipher(stoi(key));
+            cipherText = cipher.encrypt(Text);
+            decryptedText = cipher.decrypt(cipherText);
+			cout<<"key="<<key<<endl;
+			cout<<cipherText<<endl;
+			cout<<decryptedText<<endl;
+		}else
+			throw cipher_error(std::string("Invalid key ")+key);
 
-		
-
-        modAlphaCipher cipher(intKey);
-        cipherText = cipher.encrypt(Text);
-        decryptedText = cipher.decrypt(cipherText);
-        std::cout << "key = " << key << std::endl;
-        std::cout << "Encrypted text: " << cipherText << std::endl;
-        std::cout << "Decrypted text: " << decryptedText << std::endl;
-    } catch (const cipher_error & e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-    }
-    std::cout << "" << std::endl;
+	
+ 	} catch (const cipher_error & e) {
+ 		cerr<<"Error: "<<e.what()<<endl;
+ }
 }
-
 int main()
 {
     check("THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG","0");
     check("THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG","");
     check("THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG","5");
+    check("thequikbrownfoxjumpsovertherlazyDOG","5");
     check("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG","100");
-    
-    return 0;
 }
