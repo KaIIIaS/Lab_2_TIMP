@@ -7,24 +7,24 @@
 #include <locale>
 #include <codecvt>
 #include <algorithm>
+#include <UnitTest++/UnitTest++.h>
 using namespace std;
 
 class modAlphaCipher
 {
 private:
-    const int num_rows;
-    string getValidText(const std::string & str);
+    int newkey;
+    string getValidOpenText(const string & s);
 public:
-    modAlphaCipher() = delete;
-    modAlphaCipher(const int& key) :num_rows(key) {};    //конструктор
-    string encrypt(const string& open_text);               //зашифрование
-    string decrypt(const string& cipher_text);             //расшифрование
+    modAlphaCipher()=delete;
+    modAlphaCipher(const int& key) :newkey(key) {}; 
+    string encrypt(const string& open_st);   
+    string decrypt(const string& cipher_st);
 };
-class cipher_error: public std::invalid_argument
-{
+class cipher_error: public invalid_argument {
 public:
-    explicit cipher_error (const std::string& what_arg):
-        std::invalid_argument(what_arg) {}
-    explicit cipher_error (const char* what_arg):
-        std::invalid_argument(what_arg) {}
+	explicit cipher_error (const string& what_arg):
+		invalid_argument(what_arg) {}
+	explicit cipher_error (const char* what_arg):
+		invalid_argument(what_arg) {}
 };
